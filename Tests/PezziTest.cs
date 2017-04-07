@@ -256,7 +256,7 @@ namespace Scacchi.Modello
             //Given
             Cavallo cavallo = new Cavallo(Colore.Bianco);
             //When
-            bool esito=cavallo.PuòMuovere(
+            bool esito = cavallo.PuòMuovere(
                 colonnaPartenza: Colonna.B,
                 traversaPartenza: Traversa.Prima,
                 colonnaArrivo: Colonna.C,
@@ -268,10 +268,10 @@ namespace Scacchi.Modello
         [Fact]
         public void IlCavalloPuoMuoversiAElleOrizzontale()
         {
-           //Given
+            //Given
             Cavallo cavallo = new Cavallo(Colore.Bianco);
             //When
-            bool esito=cavallo.PuòMuovere(
+            bool esito = cavallo.PuòMuovere(
                 colonnaPartenza: Colonna.B,
                 traversaPartenza: Traversa.Prima,
                 colonnaArrivo: Colonna.D,
@@ -286,7 +286,7 @@ namespace Scacchi.Modello
             //Given
             Cavallo cavallo = new Cavallo(Colore.Nero);
             //When
-            bool esito=cavallo.PuòMuovere(
+            bool esito = cavallo.PuòMuovere(
                 colonnaPartenza: Colonna.B,
                 traversaPartenza: Traversa.Prima,
                 colonnaArrivo: Colonna.B,
@@ -301,7 +301,7 @@ namespace Scacchi.Modello
             //Given
             Cavallo cavallo = new Cavallo(Colore.Bianco);
             //When
-            bool esito=cavallo.PuòMuovere(
+            bool esito = cavallo.PuòMuovere(
                 colonnaPartenza: Colonna.B,
                 traversaPartenza: Traversa.Prima,
                 colonnaArrivo: Colonna.C,
@@ -316,7 +316,7 @@ namespace Scacchi.Modello
             //Given
             Cavallo cavallo = new Cavallo(Colore.Bianco);
             //When
-            bool esito=cavallo.PuòMuovere(
+            bool esito = cavallo.PuòMuovere(
                 colonnaPartenza: Colonna.B,
                 traversaPartenza: Traversa.Prima,
                 colonnaArrivo: Colonna.D,
@@ -331,11 +331,112 @@ namespace Scacchi.Modello
             //Given
             Cavallo cavallo = new Cavallo(Colore.Bianco);
             //When
-            bool esito=cavallo.PuòMuovere(
+            bool esito = cavallo.PuòMuovere(
                 colonnaPartenza: Colonna.B,
                 traversaPartenza: Traversa.Prima,
                 colonnaArrivo: Colonna.E,
                 traversaArrivo: Traversa.Terza
+            );
+            //Then
+            Assert.False(esito);
+        }
+
+        /*Il Re può spostarsi orizzontalmente, verticalmente 
+        o diagonalmente di una sola casa. */
+        [Fact]
+        public void IlRePuoMuovereVerticaleUnaCasa(){
+            //Given
+            Re re = new Re(Colore.Bianco);
+            //When
+            bool esito = re.PuòMuovere(
+                colonnaPartenza: Colonna.D,
+                traversaPartenza: Traversa.Prima,
+                colonnaArrivo: Colonna.D,
+                traversaArrivo: Traversa.Seconda
+            );
+            //Then
+            Assert.True(esito);
+        }
+        [Fact]
+        public void IlRePuoMuovereOrizzontaleUnaCasa(){
+            //Given
+            Re re = new Re(Colore.Bianco);
+            //When
+            bool esito = re.PuòMuovere(
+                colonnaPartenza: Colonna.D,
+                traversaPartenza: Traversa.Prima,
+                colonnaArrivo: Colonna.E,
+                traversaArrivo: Traversa.Prima
+            );
+            //Then
+            Assert.True(esito);
+        }
+        [Fact]
+        public void IlRePuoMuovereDiagonaleUnaCasa(){
+            //Given
+            Re re = new Re(Colore.Bianco);
+            //When
+            bool esito = re.PuòMuovere(
+                colonnaPartenza: Colonna.D,
+                traversaPartenza: Traversa.Prima,
+                colonnaArrivo: Colonna.E,
+                traversaArrivo: Traversa.Seconda
+            );
+            //Then
+            Assert.True(esito);
+        }
+        [Fact]
+        public void IlReNonPuoMuovereVerticalePiuDiUnaCasa(){
+            //Given
+            Re re = new Re(Colore.Bianco);
+            //When
+            bool esito = re.PuòMuovere(
+                colonnaPartenza: Colonna.D,
+                traversaPartenza: Traversa.Prima,
+                colonnaArrivo: Colonna.D,
+                traversaArrivo: Traversa.Terza
+            );
+            //Then
+            Assert.False(esito);
+        }
+        [Fact]
+        public void IlReNonPuoMuovereOrizzontalePiuDiUnaCasa(){
+            //Given
+            Re re = new Re(Colore.Bianco);
+            //When
+            bool esito = re.PuòMuovere(
+                colonnaPartenza: Colonna.D,
+                traversaPartenza: Traversa.Prima,
+                colonnaArrivo: Colonna.F,
+                traversaArrivo: Traversa.Prima
+            );
+            //Then
+            Assert.False(esito);
+        }
+        [Fact]
+        public void IlReNonPuoMuovereDiagonalePiuDiUnaCasa(){
+            //Given
+            Re re = new Re(Colore.Bianco);
+            //When
+            bool esito = re.PuòMuovere(
+                colonnaPartenza: Colonna.D,
+                traversaPartenza: Traversa.Prima,
+                colonnaArrivo: Colonna.F,
+                traversaArrivo: Traversa.Quarta
+            );
+            //Then
+            Assert.False(esito);
+        }
+        [Fact]
+        public void IlReNonPuoMuovereACaso(){
+            //Given
+            Re re = new Re(Colore.Bianco);
+            //When
+            bool esito = re.PuòMuovere(
+                colonnaPartenza: Colonna.D,
+                traversaPartenza: Traversa.Prima,
+                colonnaArrivo: Colonna.F,
+                traversaArrivo: Traversa.Settima
             );
             //Then
             Assert.False(esito);
