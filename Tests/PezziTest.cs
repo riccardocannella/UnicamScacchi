@@ -122,5 +122,67 @@ namespace Scacchi.Modello
             //Then
             Assert.False(esito);
         }
+
+        /*L'Alfiere può spostarsi lungo una linea diagonale di quante case desidera;*/
+        [Fact]
+        public void LAlfiereNonPuoMuoversiOrizzontale()
+        {
+            //Given
+            Alfiere alfiere = new Alfiere(Colore.Nero);
+            //When
+            bool esito = alfiere.PuòMuovere(
+                colonnaPartenza: Colonna.A,
+                traversaPartenza: Traversa.Prima,
+                colonnaArrivo: Colonna.F,
+                traversaArrivo: Traversa.Prima
+            );
+            //Then
+            Assert.False(esito);
+        }
+        [Fact]
+        public void LAlfiereNonPuoMuoversiVerticale()
+        {
+            //Given
+            Alfiere alfiere = new Alfiere(Colore.Nero);
+            //When
+            bool esito = alfiere.PuòMuovere(
+                colonnaPartenza: Colonna.A,
+                traversaPartenza: Traversa.Prima,
+                colonnaArrivo: Colonna.A,
+                traversaArrivo: Traversa.Settima
+            );
+            //Then
+            Assert.False(esito);
+        }
+        [Fact]
+        public void LAlfiereNonPuoMuoversiACaso()
+        {
+            //Given
+            Alfiere alfiere = new Alfiere(Colore.Bianco);
+            //When
+            bool esito = alfiere.PuòMuovere(
+                colonnaPartenza: Colonna.H,
+                traversaPartenza: Traversa.Prima,
+                colonnaArrivo: Colonna.A,
+                traversaArrivo: Traversa.Sesta
+            );
+            //Then
+            Assert.False(esito);
+        }
+        [Fact]
+        public void LAlfierePuoMuoversiDiagonale()
+        {
+            //Given
+            Alfiere alfiere = new Alfiere(Colore.Bianco);
+            //When
+            bool esito = alfiere.PuòMuovere(
+                colonnaPartenza: Colonna.A,
+                traversaPartenza: Traversa.Prima,
+                colonnaArrivo: Colonna.D,
+                traversaArrivo: Traversa.Quarta
+            );
+            //Then
+            Assert.True(esito);
+        }
     }
 }
