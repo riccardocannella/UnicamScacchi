@@ -1,15 +1,18 @@
 using System;
 
-namespace Scacchi.Modello.Pezzi {
+namespace Scacchi.Modello.Pezzi
+{
     public class Pedone : IPezzo
     {
         private readonly Colore colore;
         public Pedone(Colore colore)
         {
-            this.colore = colore;    
+            this.colore = colore;
         }
-        public Colore Colore {
-            get {
+        public Colore Colore
+        {
+            get
+            {
                 return colore;
             }
         }
@@ -20,14 +23,21 @@ namespace Scacchi.Modello.Pezzi {
             Traversa traversaArrivo)
         {
             var stessaColonna = colonnaPartenza == colonnaArrivo;
-            var distanzaTraLeTraverse = (int) traversaArrivo - (int) traversaPartenza;
+            var distanzaTraLeTraverse = Math.Abs((int)traversaArrivo - (int)traversaPartenza);
 
-            if (stessaColonna && distanzaTraLeTraverse == 1){
-                return true;
-            } else {
-                return false;
+            if (stessaColonna)
+            {
+                if (distanzaTraLeTraverse == 1)
+                    return true;
+                else if (this.colore == Colore.Bianco && traversaPartenza == Traversa.Seconda && distanzaTraLeTraverse == 2)
+                    return true;
+                else if (this.colore == Colore.Nero && traversaPartenza == Traversa.Settima && distanzaTraLeTraverse == 2)
+                    return true;
+                else return false;
             }
+            else return false;
 
         }
+
     }
 }
