@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 using Scacchi.Modello;
 
 namespace Scacchi
@@ -8,8 +7,31 @@ namespace Scacchi
     {
         static void Main(string[] args)
         {
-            SimpleXUnitRunner.SimpleXUnit.RunTests();
+            //SimpleXUnitRunner.SimpleXUnit.RunTests();
+            Console.ReadKey();
+            IOrologio orologio = new Orologio(TimeSpan.FromSeconds(5));
+            // E' consigliabile sottoscriversi non appena si ha un riferimento all'oggetto, prima di fare qualcos'altro
+            orologio.TempoScaduto += NotificaSconfitta;
+            // stessa cosa ma con lambda expression. Attenzione: impossibile togliere la sottoscrizione e riutilizzare questo metodo.
+            orologio.TempoScaduto += (object sender, Colore colore) =>
+            {
+                Console.WriteLine("Sto stampando un messaggio tramite lambda expression");
+            };
+            // la lambda expression può essere scritta anche senza specificare il tipo di argomenti
+            EventHandler<Colore> notificaS = (sender, colore) =>
+            {
+                Console.WriteLine("Sto stampando un messaggio tramite lambda expression su una variabile, da cui è possibile disiscriversi");
+            };
+            orologio.TempoScaduto += notificaS;
+            orologio.Accendi();
+            orologio.Avvia();
             Console.ReadKey();
         }
+
+        private static void NotificaSconfitta(object sender, Colore colore)
+        {
+            Console.WriteLine($"Il giocatore {colore} ha perso la partita, secondo l'orologio {sender}");
+        }
+
     }
 }

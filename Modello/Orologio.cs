@@ -10,6 +10,9 @@ namespace Scacchi.Modello
 
         private readonly Timer timer;
 
+        // EventHandler può essere tipizzato (ES: EventHandler<string>)
+        public event EventHandler<Colore> TempoScaduto;
+
         public Orologio() : this(TimeSpan.FromMinutes(tempoInizialeInMinutiDefault))
         {
         }
@@ -17,18 +20,32 @@ namespace Scacchi.Modello
         internal Orologio(TimeSpan tIniziale)
         {
             this.tempoIniziale = tIniziale;
+            // Questo timer chiama ogni 50 millisecondi il metodo ControllaTempoResiduo. Lo inizializzo senza farlo partire
             timer = new Timer(ControllaTempoResiduo, null, TimeSpan.Zero, TimeSpan.FromMilliseconds(50));
         }
 
+        // Questo solleva un evento se il tempo è scaduto. Viene chiamato dal timer.
+        // Ci sarà da qualche parte qualcuno che si sottoscrive a questo evento perché viene chiamato qui dentro in maniera completamente autonoma
         private void ControllaTempoResiduo(object state)
         {
             if (TempoResiduoBianco <= TimeSpan.Zero || TempoResiduoNero <= TimeSpan.Zero)
-                  TempoScaduto?.Invoke(this, null);
+            {
+                this.Pausa();
+                Colore colore;
+                if (TempoResiduoBianco <= TimeSpan.Zero)
+                    colore = Colore.Bianco;
+                else colore = Colore.Nero;
+                timer.Dispose();
+                // il punto interrogativo fa in modo che se non ci sono sottoscrittori non verrà sollevata un'eccezione
+            TempoScaduto?.Invoke(this, colore);
+            }
         }
 
-        
-        public TimeSpan TempoIniziale {
-            get{
+
+        public TimeSpan TempoIniziale
+        {
+            get
+            {
                 return tempoIniziale;
             }
         }
@@ -38,8 +55,8 @@ namespace Scacchi.Modello
             get
             {
 
-                if(TurnoAttuale == Colore.Bianco && !inPausa)
-                    TempoResiduoBianco = 
+                if (TurnoAttuale == Colore.Bianco && !inPausa)
+                    TempoResiduoBianco =
                         tempoIniziale - (DateTime.Now - partenzaOrologio);
                 return tempoResiduoBianco;
             }
@@ -54,8 +71,8 @@ namespace Scacchi.Modello
         {
             get
             {
-                if(TurnoAttuale == Colore.Nero && !inPausa)
-                    tempoResiduoNero = 
+                if (TurnoAttuale == Colore.Nero && !inPausa)
+                    tempoResiduoNero =
                         tempoIniziale - (DateTime.Now - partenzaOrologio);
                 return tempoResiduoNero;
             }
@@ -78,9 +95,6 @@ namespace Scacchi.Modello
             }
         }
 
-
-        public event EventHandler TempoScaduto;
-
         private bool acceso = false;
         public void Accendi()
         {
@@ -93,7 +107,7 @@ namespace Scacchi.Modello
         private bool inPausa = false;
         public void Avvia()
         {
-            if(!acceso)
+            if (!acceso)
                 throw new InvalidOperationException(
                     "L'Orologio deve essere acceso, per poter essere avviato!");
             partenzaOrologio = DateTime.Now;
@@ -105,11 +119,15 @@ namespace Scacchi.Modello
             inPausa = true;
         }
 
-        public void FineTurno() {
-            if(TurnoAttuale == Colore.Bianco) {
+        public void FineTurno()
+        {
+            if (TurnoAttuale == Colore.Bianco)
+            {
                 tempoResiduoBianco = tempoIniziale;
                 TurnoAttuale = Colore.Nero;
-            } else {
+            }
+            else
+            {
                 TempoResiduoNero = tempoIniziale;
                 TurnoAttuale = Colore.Bianco;
             }
@@ -121,6 +139,9 @@ namespace Scacchi.Modello
             Pausa();
             TempoResiduoBianco = tempoIniziale;
             TempoResiduoNero = tempoIniziale;
+        }
+        override public string ToString(){
+            return "Orologio con tempo iniziale di " + this.tempoIniziale;
         }
     }
 }
