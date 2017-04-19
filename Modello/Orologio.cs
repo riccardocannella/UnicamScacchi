@@ -11,7 +11,7 @@ namespace Scacchi.Modello
         private readonly Timer timer;
 
         // EventHandler può essere tipizzato (ES: EventHandler<string>)
-        public event EventHandler<Colore> TempoScaduto;
+        //public event EventHandler<Colore> TempoScaduto;
 
         public Orologio() : this(TimeSpan.FromMinutes(tempoInizialeInMinutiDefault))
         {
@@ -143,8 +143,8 @@ namespace Scacchi.Modello
             TempoResiduoBianco = tempoIniziale;
             TempoResiduoNero = tempoIniziale;
         }
-        override public string ToString(){
+        /*override public string ToString(){
             return "Orologio con tempo iniziale di " + this.tempoIniziale;
-        }
+        }*/
     }
 }
