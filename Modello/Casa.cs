@@ -21,6 +21,14 @@ namespace Scacchi.Modello
             get{return traversa;}
         }
 
-        public IPezzo PezzoPresente { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        private IPezzo pezzoPresente;
+        public IPezzo PezzoPresente{
+            get{
+                return pezzoPresente;
+            }
+            set{
+               pezzoPresente = value; 
+            }
+        }
     }
 }

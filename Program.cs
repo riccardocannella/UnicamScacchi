@@ -7,11 +7,11 @@ namespace Scacchi
     {
         static void Main(string[] args)
         {
-            //SimpleXUnitRunner.SimpleXUnit.RunTests();
-            Console.ReadKey();
+            SimpleXUnitRunner.SimpleXUnit.RunTests();
+  /*          Console.ReadKey();
             IOrologio orologio = new Orologio(TimeSpan.FromSeconds(5));
             // E' consigliabile sottoscriversi non appena si ha un riferimento all'oggetto, prima di fare qualcos'altro
-            orologio.TempoScaduto += NotificaSconfitta;
+            //orologio.TempoScaduto += NotificaSconfitta;
             // stessa cosa ma con lambda expression. Attenzione: impossibile togliere la sottoscrizione e riutilizzare questo metodo.
             orologio.TempoScaduto += (object sender, Colore colore) =>
             {
@@ -24,7 +24,7 @@ namespace Scacchi
             };
             orologio.TempoScaduto += notificaS;
             orologio.Accendi();
-            orologio.Avvia();
+            orologio.Avvia();*/
             Console.ReadKey();
 
             //La sottoscrizione all'evento TempoScaduto è stata spostata
