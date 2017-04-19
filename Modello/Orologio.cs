@@ -19,13 +19,8 @@ namespace Scacchi.Modello
 
         internal Orologio(TimeSpan tempoIniziale)
         {
-<<<<<<< HEAD
-            this.tempoIniziale = tIniziale;
-            // Questo timer chiama ogni 50 millisecondi il metodo ControllaTempoResiduo. Lo inizializzo senza farlo partire
-=======
             Pausa();
             this.tempoIniziale = tempoIniziale;
->>>>>>> aff0a237bac06a74f1f44fe7544917def9cef194
             timer = new Timer(ControllaTempoResiduo, null, TimeSpan.Zero, TimeSpan.FromMilliseconds(50));
         }
 
@@ -33,18 +28,6 @@ namespace Scacchi.Modello
         // Ci sarà da qualche parte qualcuno che si sottoscrive a questo evento perché viene chiamato qui dentro in maniera completamente autonoma
         private void ControllaTempoResiduo(object state)
         {
-<<<<<<< HEAD
-            if (TempoResiduoBianco <= TimeSpan.Zero || TempoResiduoNero <= TimeSpan.Zero)
-            {
-                this.Pausa();
-                Colore colore;
-                if (TempoResiduoBianco <= TimeSpan.Zero)
-                    colore = Colore.Bianco;
-                else colore = Colore.Nero;
-                timer.Dispose();
-                // il punto interrogativo fa in modo che se non ci sono sottoscrittori non verrà sollevata un'eccezione
-            TempoScaduto?.Invoke(this, colore);
-=======
             if (!inPausa && TempoResiduoBianco <= TimeSpan.Zero || TempoResiduoNero <= TimeSpan.Zero) {
                 inPausa = true;
 
@@ -54,7 +37,6 @@ namespace Scacchi.Modello
                 }
 
                 TempoScaduto?.Invoke(this, colore);
->>>>>>> aff0a237bac06a74f1f44fe7544917def9cef194
             }
         }
 
@@ -112,14 +94,11 @@ namespace Scacchi.Modello
             }
         }
 
-<<<<<<< HEAD
-=======
         public override string ToString() {
             return $"Orologio con tempo iniziale di {this.tempoIniziale}";
         }
         public event EventHandler<Colore> TempoScaduto;
 
->>>>>>> aff0a237bac06a74f1f44fe7544917def9cef194
         private bool acceso = false;
         public void Accendi()
         {
