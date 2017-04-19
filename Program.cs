@@ -26,12 +26,25 @@ namespace Scacchi
             orologio.Accendi();
             orologio.Avvia();
             Console.ReadKey();
+
+            //La sottoscrizione all'evento TempoScaduto è stata spostata
+            //in un test in OrologioTest.cs (vedi in fondo al file, riga 180)
         }
+
+        /*
+        private static void NotificaSconfitta(object sender, Colore colore)
+        {
+            Console.WriteLine($"(Dal metodo): Il giocatore {colore} ha perso la partita, secondo l'orologio {sender}!");
+        }
+<<<<<<< HEAD
 
         private static void NotificaSconfitta(object sender, Colore colore)
         {
             Console.WriteLine($"Il giocatore {colore} ha perso la partita, secondo l'orologio {sender}");
         }
 
+=======
+        */
+>>>>>>> aff0a237bac06a74f1f44fe7544917def9cef194
     }
 }

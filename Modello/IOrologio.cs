@@ -12,7 +12,10 @@ namespace Scacchi.Modello {
         void Pausa();
         void Reset();
         void FineTurno();
+<<<<<<< HEAD
 
+=======
+>>>>>>> aff0a237bac06a74f1f44fe7544917def9cef194
         event EventHandler<Colore> TempoScaduto;
     }
 }

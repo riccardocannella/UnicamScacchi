@@ -20,6 +20,7 @@ namespace Scacchi.Modello.Pezzi
             Colonna colonnaPartenza,
             Traversa traversaPartenza,
             Colonna colonnaArrivo,
+<<<<<<< HEAD
             Traversa traversaArrivo)
         {
             var stessaColonna = colonnaPartenza == colonnaArrivo;
@@ -32,5 +33,23 @@ namespace Scacchi.Modello.Pezzi
             else return false;
         }
 
+=======
+            Traversa traversaArrivo,
+            IScacchiera scacchiera = null)
+        {
+            var differenzaColonne = colonnaPartenza - colonnaArrivo;
+            var differenzaTraverse = (int)traversaPartenza - (int)traversaArrivo;
+            if (differenzaColonne == 0 && differenzaTraverse == 0)
+                return false;
+            if ((Math.Abs(differenzaColonne) - Math.Abs(differenzaTraverse)) == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+>>>>>>> aff0a237bac06a74f1f44fe7544917def9cef194
     }
 }

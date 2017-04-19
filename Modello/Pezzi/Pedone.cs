@@ -20,10 +20,16 @@ namespace Scacchi.Modello.Pezzi
             Colonna colonnaPartenza,
             Traversa traversaPartenza,
             Colonna colonnaArrivo,
-            Traversa traversaArrivo)
+            Traversa traversaArrivo,
+            IScacchiera scacchiera = null)
         {
             var stessaColonna = colonnaPartenza == colonnaArrivo;
-            var distanzaTraLeTraverse = Math.Abs((int)traversaArrivo - (int)traversaPartenza);
+            int distanzaTraLeTraverse;
+            if(Colore == Colore.Bianco){
+            distanzaTraLeTraverse = (int) traversaArrivo - (int) traversaPartenza;
+            }else{
+            distanzaTraLeTraverse =  (int) traversaPartenza - (int) traversaArrivo;
+            }
 
             if (stessaColonna)
             {
