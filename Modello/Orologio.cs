@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Threading;
 
 namespace Scacchi.Modello
@@ -110,11 +111,16 @@ namespace Scacchi.Modello
         private bool inPausa;
         public void Avvia()
         {
-            if (!acceso)
-                throw new InvalidOperationException(
-                    "L'Orologio deve essere acceso, per poter essere avviato!");
+            if(!acceso)
+                SollevaEccezione();
             partenzaOrologio = DateTime.Now;
             inPausa = false;
+        }
+
+        [DebuggerHidden]
+        private void SollevaEccezione(){
+            throw new InvalidOperationException(
+                    "L'Orologio deve essere acceso, per poter essere avviato!");
         }
 
         public void Pausa()
@@ -143,8 +149,5 @@ namespace Scacchi.Modello
             TempoResiduoBianco = tempoIniziale;
             TempoResiduoNero = tempoIniziale;
         }
-        /*override public string ToString(){
-            return "Orologio con tempo iniziale di " + this.tempoIniziale;
-        }*/
     }
 }

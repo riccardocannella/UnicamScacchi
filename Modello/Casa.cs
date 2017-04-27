@@ -7,27 +7,33 @@ namespace Scacchi.Modello
     {
         private Colonna colonna;
         private Traversa traversa;
-        public Casa(Colonna colonna, Traversa traversa){
-            this.colonna=colonna;
-            this.traversa=traversa;
+        public Casa(Colonna colonna, Traversa traversa)
+        {
+            this.colonna = colonna;
+            this.traversa = traversa;
         }
 
-    
-        public Colonna Colonna {
-            get{return colonna;}
+
+        public Colonna Colonna
+        {
+            get { return colonna; }
         }
 
-        public Traversa Traversa {
-            get{return traversa;}
+        public Traversa Traversa
+        {
+            get { return traversa; }
         }
 
         private IPezzo pezzoPresente;
-        public IPezzo PezzoPresente{
-            get{
+        public IPezzo PezzoPresente
+        {
+            get
+            {
                 return pezzoPresente;
             }
-            set{
-               pezzoPresente = value; 
+            set
+            {
+                pezzoPresente = value;
             }
         }
     }

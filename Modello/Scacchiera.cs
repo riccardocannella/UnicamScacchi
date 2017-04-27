@@ -9,9 +9,9 @@ namespace Scacchi.Modello
     {
         private ICasa[] listaCase;
 
-        /*public Scacchiera(){
+        /*public Scacchiera() {
             listaCase = new ICasa[64];
-            int contatore = 0;
+            int contatore=0;
             for (int i = 1; i < 9; i++)
             {
                 for (int j = 1; j < 9; j++, contatore++)
@@ -25,29 +25,31 @@ namespace Scacchi.Modello
 
         public Scacchiera()
         {
-            listaCase = Enumerable
-            .Range(0, 64)
+            listaCase = Enumerable.Range(0, 64)
             .Select(i => CreaCasa(i))
             .ToArray();
         }
 
         internal ICasa CreaCasa(int i)
         {
-            Colonna c = (Colonna)(i % 8 + 1);
-            Traversa t = (Traversa)(i / 8 + 1);
-            ICasa casa = new Casa(c, t);
-            if (t == Traversa.Seconda)
+            Colonna colonna = (Colonna)(i % 8 + 1);
+            Traversa traversa = (Traversa)(i / 8 + 1);
+            ICasa casa = new Casa(colonna, traversa);
+
+            if (traversa == Traversa.Seconda)
             {
                 casa.PezzoPresente = new Pedone(Colore.Bianco);
             }
-            else if (t == Traversa.Settima)
+            else if (traversa == Traversa.Settima)
             {
                 casa.PezzoPresente = new Pedone(Colore.Nero);
             }
-            else if (t == Traversa.Prima || t == Traversa.Ottava)
+            else if (traversa == Traversa.Prima || traversa == Traversa.Ottava)
             {
-                Colore colore = (t == Traversa.Prima ? Colore.Bianco : Colore.Nero);
-                switch (c)
+
+                Colore colore = traversa == Traversa.Prima ? Colore.Bianco : Colore.Nero;
+
+                switch (colonna)
                 {
                     case Colonna.A:
                         casa.PezzoPresente = new Torre(colore);
