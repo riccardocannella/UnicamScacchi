@@ -68,9 +68,7 @@ namespace Scacchi.Modello.Pezzi {
             } else {
                 return false;
             }
-            else return false;
 
         }
-
     }
 }

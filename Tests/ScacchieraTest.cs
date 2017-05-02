@@ -32,6 +32,10 @@ namespace Scacchi.Tests
             Assert.Equal(Colonna.F, casa.Colonna);
             Assert.Equal(Traversa.Quinta, casa.Traversa);
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8a4050eb46e4aa472bc417b141f13c6ee6fa137e
         [Fact]
         public void InSecondaTraversaDevonoEsserciTuttiPedoniBianchi()
         {
