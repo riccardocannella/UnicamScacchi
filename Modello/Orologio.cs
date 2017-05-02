@@ -127,11 +127,13 @@ namespace Scacchi.Modello
         {
             inPausa = true;
         }
-
-        public void FineTurno()
-        {
-            if (TurnoAttuale == Colore.Bianco)
-            {
+        public bool InPausa {
+            get {
+                return inPausa;
+            }
+        }
+        public void FineTurno() {
+            if(TurnoAttuale == Colore.Bianco) {
                 tempoResiduoBianco = tempoIniziale;
                 TurnoAttuale = Colore.Nero;
             }

@@ -32,7 +32,6 @@ namespace Scacchi
             orologio.Accendi();
             orologio.Avvia();*/
             Console.ReadKey();
-
         }
 
         /*var pedone1 = new Pedone(Colore.Bianco);
