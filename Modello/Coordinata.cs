@@ -9,6 +9,9 @@ namespace Scacchi.Modello {
 
         public Traversa Traversa { get; private set; }
         public Colonna Colonna { get; private set; }
-
+        
+        public override string ToString(){
+            return this.Traversa.ToString() + this.Colonna.ToString();
+        }
     }
 }

@@ -10,14 +10,16 @@ namespace Scacchi.Modello
     {
 
 
-        public Tavolo(IScacchiera scacchiera, IOrologio orologio)
+        public Tavolo(IScacchiera scacchiera, IOrologio orologio, IBloccoNote bloccoNote)
         {
             Scacchiera = scacchiera;
             Orologio = orologio;
+            BloccoNote = bloccoNote;
         }
         public Dictionary<Colore, IGiocatore> Giocatori { get; private set; }
 
         public IScacchiera Scacchiera { get; private set; }
+        public IBloccoNote BloccoNote {get; private set;}
         public IOrologio Orologio { get; private set; }
 
         public event EventHandler<Colore> Vittoria;
@@ -62,6 +64,8 @@ namespace Scacchi.Modello
             }
 
             Scacchiera.spostaPezzo(casaPartenza, casaArrivo);
+            // scrivo nel blocco note la mossa
+            BloccoNote.ScriviMossaAsync(partenza, arrivo);
             //Controllo che il re non sia stato mangiato
             Colore coloreControlloSconfitta;
             if(Orologio.TurnoAttuale == Colore.Bianco) {
